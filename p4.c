@@ -53,7 +53,7 @@ int main()
 {
     int largestPalindrome = -1;
 
-    for (int i = STRATING_NUMBER; i <= ENDING_NUMBER; ++i)
+    for (int i = STARTING_NUMBER; i <= ENDING_NUMBER; ++i)
     {
         for(int j = i; j <= ENDING_NUMBER; ++j) //multiplication is commutative
         {
@@ -70,4 +70,5 @@ int main()
     printf("%d\n", largestPalindrome);
 
     return 0;
+    //
 }
