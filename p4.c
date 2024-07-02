@@ -70,5 +70,4 @@ int main()
     printf("%d\n", largestPalindrome);
 
     return 0;
-    //
 }
