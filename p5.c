@@ -4,6 +4,17 @@
 #define UPPER_LIMIT 20
 
 
+
+
+void initBaseValuesPrimeNumbersArray(int primeNumbersArray[], int sizePrimeNumberArray)
+{
+    for (int i = 0; i < sizePrimeNumberArray; ++i)
+    {
+        primeNumbersArray[i] = -1;
+    }
+
+}
+
 int isPrime(int nextNumber)
 {
     if (nextNumber< 2)
@@ -43,21 +54,42 @@ int intitPrimeNumbers(int primeNumbersArray[], int sizePrimeNumberArray)
 }
 
 
+void initBaseValuesPrimeFactorsArray(int primeFactorsArray[][], int numberOfRowsPrimeFactors, int numberOfPrimes, int primeNumbersArray[])
+{
+        //first line contains the primes
+        for (int j = 0; j < numberOfPrimes; ++j)
+        {
+            primeFactorsArray[0][j] = primeNumbersArray[j];
+        }
+
+        for (int i = 1; i < numberOfRowsPrimeFactors; ++i)
+        {
+            for (int j = 0; j < numberOfPrimes; ++j)
+            {
+                primeFactorsArray[i][j] = 0;
+            }
+        }
+
+}
+
 
 int main()
 {
 
 
-    int sizePrimeNumberArray = UPPER_LIMIT;
+    int sizePrimeNumberArray = UPPER_LIMIT; // assumption until UPPER_LIMIT only UPPER_LIMIT primes are
     int primeNumbersArray[sizePrimeNumberArray];
 
+    initBaseValuesPrimeNumbersArray(primeNumbersArray, sizePrimeNumberArray);
     int numberOfPrimes = intitPrimeNumbers(primeNumbersArray, sizePrimeNumberArray);
 
-    int primeFactorsArray = UPPER_LIMIT*UPPER_LIMIT;
+    int numberOfRowsPrimeFactors = 1+(UPPER_LIMIT-LOWER_LIMIT+1); //first line: primes; other lines the numbers in increasing order
+    int primeFactorsArray[numberOfRowsPrimeFactors][numberOfPrimes];
+    initBaseValuesPrimeFactorsArray(primeFactorsArray, numberOfRowsPrimeFactors, numberOfPrimes, primeNumbersArray);
     int primeFactorsArray[arraySizePrimeFactors]; // assumption, number [LOWER_LIMIT, UPPER_LIMIT] has maximum (UPPER_LIMIT*UPPER_LIMIT) prime factors
     int indexArray  = 0;
-
-    for(int i = 0; i < numberOfPrimes; ++i)
+    */
+    for(int i = 0; i < sizePrimeNumberArray; ++i)
     {
         printf("%d\n", primeNumbersArray[i]);
     }
