@@ -4,8 +4,6 @@
 #define UPPER_LIMIT 20
 
 
-
-
 void initBaseValuesPrimeNumbersArray(int primeNumbersArray[], int sizePrimeNumberArray)
 {
     for (int i = 0; i < sizePrimeNumberArray; ++i)
@@ -53,48 +51,99 @@ int intitPrimeNumbers(int primeNumbersArray[], int sizePrimeNumberArray)
     return numberOfPrimes;
 }
 
-
-void initBaseValuesPrimeFactorsArray(int primeFactorsArray[][], int numberOfRowsPrimeFactors, int numberOfPrimes, int primeNumbersArray[])
+void initBaseValuesPrimeFactorsArray(int primeFactorsArray[], int numberOfRowsPrimeFactors, int numberOfPrimes, int primeNumbersArray[])
 {
         //first line contains the primes
         for (int j = 0; j < numberOfPrimes; ++j)
         {
-            primeFactorsArray[0][j] = primeNumbersArray[j];
+            primeFactorsArray[0+j] = primeNumbersArray[j];
         }
 
         for (int i = 1; i < numberOfRowsPrimeFactors; ++i)
         {
             for (int j = 0; j < numberOfPrimes; ++j)
             {
-                primeFactorsArray[i][j] = 0;
+                primeFactorsArray[i*numberOfPrimes+j] = 0;
             }
         }
-
 }
 
+int findMaxPowerInColumn(int primeFactorsArray[], int numberOfPrimes, int choosenColumn)
+{
+    int maxFactor = 0;
+    for ( int i = LOWER_LIMIT; i<=UPPER_LIMIT; ++i)
+    {
+        if (primeFactorsArray[i*numberOfPrimes+choosenColumn] > maxFactor)
+        {
+            maxFactor = primeFactorsArray[i*numberOfPrimes+choosenColumn];
+        }
+    }
+
+    return maxFactor;
+}
+
+int powerFunc(int base, int power)
+{
+    int result = 1;
+    while ( power >= 1)
+    {
+        result *=base;
+        power--;
+    }
+
+    return result;
+}
+
+int leastCommonMultFunc(int primeFactorsArray[], int numberOfRowsPrimeFactors, int numberOfPrimes)
+{
+    for (int i = LOWER_LIMIT; i <= UPPER_LIMIT; ++i) //line 0 contains the prime factors
+    {
+        int valueToDecompose = i;
+        for(int j = 0; j < numberOfPrimes; ++j)
+        {
+            if (valueToDecompose %  primeFactorsArray[j] == 0)
+            {
+                while(valueToDecompose %  primeFactorsArray[j] == 0)
+                {
+                    primeFactorsArray[i*numberOfPrimes+j]++;
+                    valueToDecompose /= primeFactorsArray[j];
+                }
+            }
+        }
+    }
+
+    int lcm = 1;
+
+    for ( int i = 0; i < numberOfPrimes; ++i)
+    {
+        lcm *= powerFunc(primeFactorsArray[i], findMaxPowerInColumn(primeFactorsArray, numberOfPrimes, i));
+    }
+
+    return lcm;
+}
 
 int main()
 {
-
-
+    //determine prime numbers until UPPER_LIMIT
     int sizePrimeNumberArray = UPPER_LIMIT; // assumption until UPPER_LIMIT only UPPER_LIMIT primes are
-    int primeNumbersArray[sizePrimeNumberArray];
+    int primeNumbersArray[sizePrimeNumberArray]; // oversized array
 
+    //initialization of array to -1 values
     initBaseValuesPrimeNumbersArray(primeNumbersArray, sizePrimeNumberArray);
     int numberOfPrimes = intitPrimeNumbers(primeNumbersArray, sizePrimeNumberArray);
 
+    //working array
     int numberOfRowsPrimeFactors = 1+(UPPER_LIMIT-LOWER_LIMIT+1); //first line: primes; other lines the numbers in increasing order
-    int primeFactorsArray[numberOfRowsPrimeFactors][numberOfPrimes];
+    int primeFactorsArray[numberOfRowsPrimeFactors*numberOfPrimes];
     initBaseValuesPrimeFactorsArray(primeFactorsArray, numberOfRowsPrimeFactors, numberOfPrimes, primeNumbersArray);
-    int primeFactorsArray[arraySizePrimeFactors]; // assumption, number [LOWER_LIMIT, UPPER_LIMIT] has maximum (UPPER_LIMIT*UPPER_LIMIT) prime factors
-    int indexArray  = 0;
-    */
-    for(int i = 0; i < sizePrimeNumberArray; ++i)
-    {
-        printf("%d\n", primeNumbersArray[i]);
-    }
-}
 
+    //Least common multiple
+    int lcm = leastCommonMultFunc(primeFactorsArray, numberOfRowsPrimeFactors, numberOfPrimes);
+
+    printf("%d\n", lcm);
+
+    return 0;
+}
 /*
 1 -> 1
 2 -> 2
@@ -117,8 +166,5 @@ int main()
 19 -> 19
 20 - > 2 * 2 * 5
 
-1 2 2
-2 3 6
-6 4 
-
+For each base the highest factor is needed.
 */
