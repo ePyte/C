@@ -55,6 +55,11 @@ long long maxBatchOfMult(char theNumber[])
         for(int j = 0; j < CHOOSEN_LENGTH_OF_NUMBERS; j++)
         {
             int newDigit = nextDigit(theNumber[i+j]);
+            if(newDigit == 0) //if one tag is 0, the result of multiplication will be 0
+            {
+                newProduct = 0;
+                break;
+            }
             newProduct *= newDigit;
         }
         printf("%d. %lld\n", i, newProduct);
