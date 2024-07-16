@@ -1,7 +1,7 @@
-#include <stdio.h>
+#ifndef CONVERTCHARTOINT_H
+#define CONVERTCHARTOINT_H
 
-#define NUMBEROFCOLS 20
-#define NUMBEROFROWS 20
+#include <stdio.h>
 
 int nextDigit(char currentChar)
 {
@@ -50,48 +50,4 @@ int getInt(char c, char d)
     return nextDigit(c) * 10 + nextDigit(d);
 }
 
-int main()
-{
-
-    FILE *fptr;
-    fptr = fopen("p10_inputs.txt", "r");
-
-
-    if(fptr == NULL)
-    {
-    printf("Not able to open the file.");
-    return 0;
-    }
-
-    int indexArray = 0;
-    int workingArray[NUMBEROFCOLS*NUMBEROFROWS];
-    char c;
-    char d;
-
-    while (1)
-    {
-        c = fgetc(fptr);
-        d = fgetc(fptr);//works only for 2 digit numbers; the leading 0 can be handled
-        workingArray[indexArray] = getInt(c, d);
-        ++indexArray;
-
-        if ((c = fgetc(fptr)) == EOF) //spaces; \n; EOF
-        {
-            break;
-        }
-    }
-
-    for (int i = 0; i<NUMBEROFROWS; ++i)
-    {
-        for(int j = 0; j < NUMBEROFCOLS; ++j)
-        {
-            printf("%d ", workingArray[i*NUMBEROFCOLS+j]);
-        }
-            printf("\n");
-    }
-
-
-    fclose(fptr);
-    return 1;
-}
-
+#endif
