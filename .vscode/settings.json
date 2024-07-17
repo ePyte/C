@@ -2,6 +2,7 @@
     "files.associations": {
         "horizonvertmulheader.h": "c",
         "maxdiagonalmulheader.h": "c",
-        "maxheader.h": "c"
+        "maxheader.h": "c",
+        "initheader.h": "c"
     }
 }
