@@ -3,6 +3,7 @@
         "horizonvertmulheader.h": "c",
         "maxdiagonalmulheader.h": "c",
         "maxheader.h": "c",
-        "initheader.h": "c"
+        "initheader.h": "c",
+        "readinputheader.h": "c"
     }
 }

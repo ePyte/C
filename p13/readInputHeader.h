@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int firstTenDigitsFunc(int sumArray[], int lengthOfSum)
 {
@@ -18,10 +19,14 @@ int firstTenDigitsFunc(int sumArray[], int lengthOfSum)
         for(int j = 0; j < NUMOFDIGITS; ++j)
         {
             c = fgetc(ftpr);
-            
+            addDigitToArray(j, c, sumArray);//numbers are stored from "left to right"
         }
         fgetc(ftpr);//'\n's and EOF
     }
 
-    
+    fclose(ftpr);
+
+    int result = getTopTenDigitsFunc(sumArray, lengthOfSum);
+
+    return result;
 }

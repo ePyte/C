@@ -2,16 +2,19 @@
 
 #define NUMOFROWS 100
 #define NUMOFDIGITS 50
+#define LENGHTOFSUM 150 //assumption each addition will add one digit to the number (worst case)
+#define TENDIGITS 10
 
 #include "initHeader.h"
+#include "operationsHeader.h"
 #include "readInputHeader.h"
 
 int main()
 {
-    int lengthOfSum = 150;
-    int sumArray[lengthOfSum];//assumption each addition will add one digit to the number (worst case)
-    initArrayFunc(sumArray, lengthOfSum);
-    int firstTenDigits = firstTenDigitsFunc(sumArray, lengthOfSum);
+    int sumArray[LENGHTOFSUM];
+    initArrayFunc(sumArray, LENGHTOFSUM);
+    int firstTenDigits = firstTenDigitsFunc(sumArray, LENGHTOFSUM);
 
+    printf("%d\n", firstTenDigits);
     return 1;
 }
