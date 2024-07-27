@@ -7,14 +7,14 @@
 
 #include "initHeader.h"
 #include "operationsHeader.h"
-#include "readInputHeader.h"
+#include "inputUsingHeader.h"
 
 int main()
 {
     int sumArray[LENGHTOFSUM];
     initArrayFunc(sumArray, LENGHTOFSUM);
-    int firstTenDigits = firstTenDigitsFunc(sumArray, LENGHTOFSUM);
+    long long firstTenDigits = firstTenDigitsFunc(sumArray, LENGHTOFSUM);
 
-    printf("%d\n", firstTenDigits);
+    printf("%lld\n", firstTenDigits);
     return 1;
 }

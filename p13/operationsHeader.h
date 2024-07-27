@@ -42,43 +42,71 @@ int nextDigit(char currentChar)
     return currentDigit;
 }
 
-void addDigitToArray(int j, char c, int sumArray[])
+void addDigitToDigit(int newDigit, int indexOfNewDigit, int sumArray[])
 {
-    int digit = nextDigit(c);
-    int index = NUMOFDIGITS - j-1; //numbers are kept from "left to right"
-    int digitInArray = sumArray[index];
-    
-    while((digitInArray + digit) >= 10)
-    {
-        sumArray[index] = ((digitInArray + digit) % 10);
-        digit = 1;
-        ++index;
-        digitInArray = sumArray[index];
-    }
+        int index = LENGHTOFSUM - indexOfNewDigit-1; //numbers: right smallest decimal"
+        int digitInSumArray = sumArray[index];
+        
+        while(1)
+        {
+            if((digitInSumArray + newDigit) < 10)
+            {
+                sumArray[index] = ((digitInSumArray + newDigit));
+                break;
+            }
+            else
+            {
+                while((digitInSumArray + newDigit) >= 10)
+                {
+                    sumArray[index] = ((digitInSumArray + newDigit) % 10);
+                    newDigit = 1;
+                    --index;
+                    digitInSumArray = sumArray[index];
+                }
+                break;
+            }
+        }
 
 }
 
-int getTopTenDigitsFunc(int sumArray[], int lengthOfSum)
+void addDigitsToArray(char charArray[], int sumArray[])
 {
-    int topTenDigitNumber = 0;
-    int counter = 0;
-    for(int i = lengthOfSum-1; i >=0; --i)
+    for(int i = NUMOFDIGITS-1; i >= 0; --i)
     {
-        if(counter> lengthOfSum - 1)
+        addDigitToDigit(nextDigit(charArray[i]), i, sumArray);
+    }
+}
+
+long long getTopTenDigitsFunc(int sumArray[])
+{
+    long long topTenDigitNumber = 0;
+    int counter = 0;
+    for(int i = 0; i < LENGHTOFSUM; ++i)
+    {
+        printf("%d", sumArray[i]);
+    }
+    printf("\n");
+    
+    for(int i = 0; i < LENGHTOFSUM; ++i)
+    {
+        if((counter >= TENDIGITS))
         {
             return topTenDigitNumber;
         }
 
-        if((sumArray[i] != 0) && counter == 0)//getFirstDigit
+        if(counter > 0)
+        {
+            topTenDigitNumber *= 10; 
+            topTenDigitNumber += sumArray[i];
+            ++counter;
+        }
+
+        if((sumArray[i] != 0) && (counter == 0))//getFirstDigit
         {
             topTenDigitNumber = sumArray[i];
             ++counter;
         }
-
-        if( counter > 0)
-        {
-            topTenDigitNumber = topTenDigitNumber * 10 + sumArray[i];
-            ++counter;
-        }
     }
+
+    return 0; //no 10 digit number found
 }
