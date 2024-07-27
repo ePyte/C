@@ -25,13 +25,6 @@ long long firstTenDigitsFunc(int sumArray[], int lengthOfSum)
         fgetc(ftpr);//'\n's and EOF
     }
 
-    for(int i = 0; i < lengthOfSum; ++i)
-    {
-        printf("%d", sumArray[i]);
-    }
-    printf("\n");
-    
-
     fclose(ftpr);
 
     long long result = getTopTenDigitsFunc(sumArray);

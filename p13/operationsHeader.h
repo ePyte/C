@@ -44,29 +44,23 @@ int nextDigit(char currentChar)
 
 void addDigitToDigit(int newDigit, int indexOfNewDigit, int sumArray[])
 {
-        int index = LENGHTOFSUM - indexOfNewDigit-1; //numbers: right smallest decimal"
+        int index = LENGHTOFSUM - (NUMOFDIGITS - indexOfNewDigit); //numbers: right smallest decimal
         int digitInSumArray = sumArray[index];
         
         while(1)
         {
             if((digitInSumArray + newDigit) < 10)
             {
-                sumArray[index] = ((digitInSumArray + newDigit));
+                sumArray[index] = (digitInSumArray + newDigit);
                 break;
             }
-            else
-            {
-                while((digitInSumArray + newDigit) >= 10)
-                {
-                    sumArray[index] = ((digitInSumArray + newDigit) % 10);
+            else // the sum of 2 digits is >=10
+            {       sumArray[index] = ((digitInSumArray + newDigit) % 10);
                     newDigit = 1;
                     --index;
                     digitInSumArray = sumArray[index];
-                }
-                break;
             }
         }
-
 }
 
 void addDigitsToArray(char charArray[], int sumArray[])
@@ -81,12 +75,7 @@ long long getTopTenDigitsFunc(int sumArray[])
 {
     long long topTenDigitNumber = 0;
     int counter = 0;
-    for(int i = 0; i < LENGHTOFSUM; ++i)
-    {
-        printf("%d", sumArray[i]);
-    }
-    printf("\n");
-    
+
     for(int i = 0; i < LENGHTOFSUM; ++i)
     {
         if((counter >= TENDIGITS))
