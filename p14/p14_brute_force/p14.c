@@ -1,17 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define MAXLIMIT 1000000
 
-int main()
+struct maxValues
 {
-    int maxChain=0;
+    int maxChain;
     long long numberWithMaxChain;
-    int chain;
-    long long newNumber;
-    for(int i = 1; i < MAXLIMIT; ++i)
-    {
-        chain = 1;
-        newNumber = i;
+};
+
+typedef struct maxValues maxValStr;
+
+void checkCollatz(int index, maxValStr* maxValues)
+{
+
+    int chain = 1;
+    long long newNumber = index;
+
 
         while(newNumber!=1)
         {
@@ -27,13 +32,32 @@ int main()
             ++chain;
         }
 
-        if(chain > maxChain)
+        if(chain > maxValues->maxChain)
         {
-            maxChain = chain;
-            numberWithMaxChain = newNumber;
+            maxValues->maxChain = chain;
+            maxValues->numberWithMaxChain = (long long)index;
         }
+}
+
+int main()
+{
+    maxValStr* maxValues = (maxValStr*)malloc(sizeof(maxValStr));
+
+    if ( maxValues == NULL)
+    {
+        printf("Memory allocation failed\n");
+        return 0;
+    }
+    maxValues->maxChain = 0;
+    maxValues->numberWithMaxChain = 0;
+
+    for(int i = 1; i < MAXLIMIT; ++i)
+    {
+        checkCollatz(i, maxValues);
     }
 
-    printf("%lld\n", numberWithMaxChain);
+    printf("%lld\n", maxValues->numberWithMaxChain);
+
+    free(maxValues);
     return 1;
 }
