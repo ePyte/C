@@ -1,3 +1,4 @@
+//runtime: ~0.29s
 #include <stdio.h>
 #include <stdlib.h>
 
