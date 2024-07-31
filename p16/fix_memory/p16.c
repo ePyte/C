@@ -1,3 +1,5 @@
+//From valgrind: total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated.
+//Runtime: 0.006s
 #include <stdio.h>
 
 #define BASE 2
