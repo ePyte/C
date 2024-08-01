@@ -1,30 +1,41 @@
-void initArray(int resultArray[], int * length)//the lowest decimal in the last cell
+#ifndef OPERATIONSHEADER_H
+#define OPERATIONSHEADER_H
+
+void initArray(int resultArray[], int * length)//the lowest decimal in the first cell
 {
-    for(int i = 0; i < (*length)-1; ++i)
+    for(int i = 1; i < (*length); ++i)
     {
         resultArray[i] = -1;
     }
-    resultArray[(*length)-1] = BASE;
+    resultArray[0] = BASE;
 }
 
-void doubleArraySize(int resultArray[], int* length)
+
+void doubleInitArray(int prevLength, int resultArray[], int newLength)
+{
+    for(int i = prevLength; i < newLength; ++i)
+    {
+        resultArray[i] = -1;
+    }
+}
+
+void doubleArraySize(int ** resultArray, int* length)
 {
     int prevLength = (*length);
-    *length *= 2;
+    int newLength = 2 * prevLength;
+    *length = newLength;
 
-    int * ptr = (int *)realloc(resultArray, (*length) * sizeof(int));
+    int * ptr = (int *)realloc((*resultArray), newLength * sizeof(int));
     if(ptr == NULL)
     {
         printf("Memory reallocation has failed.\n");
         exit(0);
     }
-    resultArray = ptr;
-    copyArray(prevLength, resultArray, (*length));
-
+    *resultArray = ptr;
+    doubleInitArray(prevLength, *resultArray, *length);
 }
 
-
-void powFunc(int resultArray[], int * length)
+void powFunc(int ** resultArray, int * length)
 {
     int exp = EXP;
     int overTen = 0;
@@ -33,41 +44,41 @@ void powFunc(int resultArray[], int * length)
     {
         for(int i = 0; i < (*length); ++i)//turn the direction
         {
-            if(resultArray[i] == -1)//exit from for cycle
+            if((*resultArray)[i] == -1)//exit from for cycle
             {
                 if(overTen == 1)
                 {
-                    resultArray[i] = overTen;
+                    (*resultArray)[i] = overTen;
                 }
                 overTen = 0;
                 --exp;//exit from while cycle
                 break;
             }
 
-            if((BASE * resultArray[i] + overTen) >= 10)
+            if((BASE * (*resultArray)[i] + overTen) >= 10)
             {
-                resultArray[i]= ((BASE * resultArray[i] + overTen) % 10);
+                (*resultArray)[i]= ((BASE * (*resultArray)[i] + overTen) % 10);
                 overTen = 1;
             }
             else
             {
-                resultArray[i]= BASE * resultArray[i] + overTen;
+                (*resultArray)[i]= BASE * (*resultArray)[i] + overTen;
                 overTen = 0;
             }
 
             if((i == ((*length)-2)) && (overTen == 1))
             {
-                doubleArraySize(int resultArray[], int * length)
+                doubleArraySize(resultArray, length);
             }
         }
     }
 }
 
 
-int addDigits(int resultArray[])
+long long addDigits(int resultArray[], int * length)
 {
     long long sum = 0;
-    for(int i = LENGTH-1; i >= 0; --i)
+    for(int i = 0; i < *length; ++i)
     {
         if(resultArray[i] != -1)
         {
@@ -81,11 +92,13 @@ int addDigits(int resultArray[])
     return sum;
 }
 
-long long sumOfDigits(int resultArray[], int * length)
+long long sumOfDigits(int ** resultArray, int * length)
 {
     powFunc(resultArray, length);
 
-    long long result = addDigits(resultArray);
+    long long result = addDigits(*resultArray, length);
     return result;
 }
+
+#endif
 
