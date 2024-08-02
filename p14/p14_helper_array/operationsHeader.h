@@ -7,8 +7,8 @@ void quickCheckWithArray(chainInfoStr* workingChainInfoStr, int helperArray[])
     {
         if(helperArray[workingChainInfoStr->numberWithchainLength-1] != -1)
         {
+            workingChainInfoStr->chainLength += (helperArray[workingChainInfoStr->numberWithchainLength-1]-1); //-1 is necessary, as the while cycle in checkCollatz has ++
             workingChainInfoStr->numberWithchainLength = 1;
-            workingChainInfoStr->chainLength += helperArray[workingChainInfoStr->numberWithchainLength-1]-1; //-1 is necessary, as the while cycle in checkCollatz has ++
         }
     }
 }
@@ -45,7 +45,9 @@ void cycleCollatz(chainInfoStr* workingChainInfoStr, int helperArray[])
             ++workingChainInfoStr->numberWithchainLength;
         }
         ++(workingChainInfoStr->chainLength);
+
         quickCheckWithArray(workingChainInfoStr, helperArray);
+
     }
 }
 
