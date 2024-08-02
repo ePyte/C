@@ -1,3 +1,6 @@
+#ifndef OPERATIONSHEADER_H
+#define OPERATIONSHEADER_H
+
 void initArray(int resultArray[])//the lowest decimal in the last cell
 {
     for(int i = 0; i < LENGTH-1; ++i)
@@ -66,3 +69,5 @@ long long sumOfDigits(int resultArray[])
     long long result = addDigits(resultArray);
     return result;
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef OPERATIONSHEADER_H
+#define OPERATIONSHEADER_H
+
 #include <stdio.h>
 
 int nextDigit(char currentChar)
@@ -99,3 +102,5 @@ long long getTopTenDigitsFunc(int sumArray[])
 
     return 0; //no 10 digit number found
 }
+
+#endif

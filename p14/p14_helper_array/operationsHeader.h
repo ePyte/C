@@ -1,3 +1,6 @@
+#ifndef OPERATIONSHEADER_H
+#define OPERATIONSHEADER_H
+
 void quickCheckWithArray(chainInfoStr* workingChainInfoStr, int helperArray[])
 {
     if(workingChainInfoStr->numberWithchainLength <= MAXLIMIT)
@@ -75,3 +78,5 @@ void initHelperArray(int helperArray[])//(index+1) the number which is checked; 
         helperArray[i] = -1;
     }
 }
+
+#endif

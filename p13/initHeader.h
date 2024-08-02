@@ -1,3 +1,6 @@
+#ifndef INITHEADER_H
+#define INITHEADER_H
+
 #include <stdio.h>
 
 
@@ -8,3 +11,5 @@ void initArrayFunc(int sumArray[], int lengthOfSum)
         sumArray[i] = 0;
     }
 }
+
+#endif

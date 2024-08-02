@@ -1,4 +1,5 @@
-
+#ifndef OPERATIONSHEADER_H
+#define OPERATIONSHEADER_H
 
 void firstRowInit(long long mainArray[])
 {
@@ -27,3 +28,5 @@ void addTogetherTheDiagonals(long long mainArray[])
         
     }
 }
+
+#endif

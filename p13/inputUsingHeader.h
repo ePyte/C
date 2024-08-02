@@ -1,3 +1,6 @@
+#ifndef INPUTUSINGHEADER_H
+#define INPUTUSINGHEADER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,3 +34,5 @@ long long firstTenDigitsFunc(int sumArray[], int lengthOfSum)
 
     return result;
 }
+
+#endif
