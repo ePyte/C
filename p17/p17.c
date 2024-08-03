@@ -3,6 +3,8 @@
 #define MAXLIMIT 1000
 
 #include "enumMainNumbers.h"
+#include "operationsHeader.h"
+#include "exchangeHeader.h"
 
 int main()
 {

@@ -5,6 +5,7 @@
         "maxheader.h": "c",
         "initheader.h": "c",
         "readinputheader.h": "c",
-        "operationsheader.h": "c"
+        "operationsheader.h": "c",
+        "exchangeheader.h": "c"
     }
 }
