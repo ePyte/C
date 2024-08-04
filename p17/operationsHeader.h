@@ -25,7 +25,7 @@ int countCharsOfNumberFunc(numberWithDigitsStr * numberDividedPtr)
         return numberOfChars += tenToNineteenExchange(10* (numberDividedPtr->tens) + numberDividedPtr->ones);
     }
 
-    return numberOfChars + tensExchange(numberDividedPtr->tens) + hundredsOrOnesExchange(numberDividedPtr->ones)
+    return numberOfChars + tensExchange(numberDividedPtr->tens) + hundredsOrOnesExchange(numberDividedPtr->ones);
 }
 
 void divideNumberFunc(int nextNumber, numberWithDigitsStr * numberDividedPtr)
@@ -50,7 +50,7 @@ int numberOfCharsFunc(int nextNumber)
 {
     int sumOfDigits = 0;
     numberWithDigitsStr numberDivided = {0, 0, 0, 0};
-    numberWithDigitsStr * numberDividedPtr = &newNumber;
+    numberWithDigitsStr * numberDividedPtr = &numberDivided;
     if(nextNumber == MAXLIMIT)
     {
         return ONE + THOUSAND;

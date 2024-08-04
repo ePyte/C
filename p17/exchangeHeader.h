@@ -57,13 +57,12 @@ int tenToNineteenExchange(int number)
     }
 }
 
-
 int tensExchange(int number)
 {
     switch(number)
     {
         case 2:
-            return TWENTIY;
+            return TWENTY;
         case 3:
             return THIRTY;
         case 4:

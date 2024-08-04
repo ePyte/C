@@ -9,10 +9,10 @@ enum mainNumbers
     FOUR = 4,
     FIVE = 4,
     SIX = 3,
-    SEVEN = 7,
-    EIGHT = 8,
-    NINE = 9,
-    TEN = 10,
+    SEVEN = 5,
+    EIGHT = 5,
+    NINE = 4,
+    TEN = 3,
 
     ELEVEN = 6,
     TWELVE = 6,
@@ -21,7 +21,7 @@ enum mainNumbers
     FIFTEEN = 7,
     SIXTEEN = 7,
     SEVENTEEN = 9,
-    EIGHTEEN = 9,
+    EIGHTEEN = 8,
     NINETEEN = 8,
     TWENTY = 6,
 
@@ -33,11 +33,11 @@ enum mainNumbers
     EIGHTY = 6,
     NINETY = 6,
 
-    HUNDRED = 6,
+    HUNDRED = 7,
 
-    THOUSAND = 7,
+    THOUSAND = 8,
 
-    AND = 3;
+    AND = 3
 };
 
 #endif
