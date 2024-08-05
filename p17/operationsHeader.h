@@ -59,7 +59,6 @@ int numberOfCharsFunc(int nextNumber)
     return countCharsOfNumberFunc(numberDividedPtr);
 }
 
-
 int addTogetherNumbers()
 {
     int sum = 0;
