@@ -3,7 +3,7 @@
 #define NUMBEROFMONTHS 12
 #define NUMBEROFDAYSPERYEARNOTLEAP 365
 #define NUMBEROFDAYSPERWEEK 7
-#define STARTYEAR 1991
+#define STARTYEAR 1901
 #define ENDYEAR 2000
 
 
@@ -21,6 +21,8 @@ int main()
     int initDay = 1;//1 Jan 1900 was a Monday
 
     int firstDay = (initDay + NUMBEROFDAYSPERYEARNOTLEAP) % NUMBEROFDAYSPERWEEK; //1900 was not a leap year (1 Jan 1901)
+    printf("%d\n", firstDay);
+    printf("Hello\n");
     int sumOfMondaysOnFirst = countMondays(firstDay, arrayMonthLengths);
 
     printf("%d\n", sumOfMondaysOnFirst);

@@ -16,6 +16,6 @@ enum MonthLengths
     OCT = 31,
     NOV = 30,
     DEC = 31
-}
+};
 
 #endif

@@ -1,32 +1,64 @@
 #ifndef OPERATIONSHEADER_H
 #define OPERATIONSHEADER_H
 
-void initArray(int inputsArray[])
+void initArray(int arrayMonthLengths[])
 {
-    inputsArray[0] = JAN;
-    inputsArray[1] = FEB_NOT_LEAP;
-    inputsArray[2] = MAR;
-    inputsArray[3] = APR;
-    inputsArray[4] = MAY;
-    inputsArray[5] = JUN;
-    inputsArray[6] = JUL;
-    inputsArray[7] = AUG;
-    inputsArray[8] = SEP;
-    inputsArray[9] = OCT;
-    inputsArray[10] = NOV;
-    inputsArray[11] = DEC;
+    arrayMonthLengths[0] = JAN;
+    arrayMonthLengths[1] = FEB_NOT_LEAP;
+    arrayMonthLengths[2] = MAR;
+    arrayMonthLengths[3] = APR;
+    arrayMonthLengths[4] = MAY;
+    arrayMonthLengths[5] = JUN;
+    arrayMonthLengths[6] = JUL;
+    arrayMonthLengths[7] = AUG;
+    arrayMonthLengths[8] = SEP;
+    arrayMonthLengths[9] = OCT;
+    arrayMonthLengths[10] = NOV;
+    arrayMonthLengths[11] = DEC;
+}
+
+int isLeapYearFunc(int year)
+{
+    if(year % 4 == 0)
+    {
+        if(year % 400 == 0)
+        {
+            return 1; // true
+        }
+        if(year % 100 == 0)
+        {
+            return 0; // false
+        }
+        return 1; // true
+    }
+    return 0; // false
 }
 
 int countMondays(int firstDay, int arrayMonthLengths[])
 {
     int sumOfMondaysOnFirst = 0;
+    int isLeapYear = 0;
     for(int i = STARTYEAR; i <= ENDYEAR; ++i)
     {
-        for(int j = 0; 0 < NUMBEROFMONTHS; ++j)
+        isLeapYear = isLeapYearFunc(i);
+        if(isLeapYear == 1)
         {
-            firstDay += arrayMonthLengths[i];
+            printf("%d\n", i);
+        }
+        for(int j = 0; j < NUMBEROFMONTHS; ++j)
+        {
+            if(isLeapYear == 1 && j == 1)
+            {
+                firstDay += FEB_LEAP;
+            }
+            else
+            {
+                firstDay += arrayMonthLengths[j];
+            }
+
+
             firstDay %= NUMBEROFDAYSPERWEEK;
-            if(firstDay == 1)
+            if(firstDay == 0) //Sundays
             {
                 ++sumOfMondaysOnFirst;
             }
