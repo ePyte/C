@@ -39,17 +39,30 @@ int sumFunc(int ** mulArray, int * endIndex)
 
 }
 
+void muptiplyDigits(int ** mulArray, int multiplier, )
+
 void multiplication(int ** mulArray, int * startIndex, int * endIndex)
 {
     (*mulArray)[0] = FACTLOWLIMIT;
+
+    for(int i = 0; i < (*endIndex); ++i)
+    {
+        printf("%d", (*mulArray)[i]);
+    }
+
     int overTen = 0;
     for(int i = FACTLOWLIMIT+1; i <= FACTUPLIMIT; ++i)
     {
+        if(i < 10)
+        {
+            multiplyDigits(mulArray, i)
+        }
         for(int j = *startIndex; j < *endIndex; ++j)
         {
+
             if((*mulArray)[j] != -1)
             {
-                if(((*mulArray)[j]) * 2 + overTen >= 10)
+                if(((*mulArray)[j]) * i + overTen >= 10)
                 {
                     (*mulArray)[j] = ((*mulArray)[j] * 2 + overTen) % 10;
                     ++overTen;
