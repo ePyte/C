@@ -8,6 +8,7 @@
         "operationsheader.h": "c",
         "exchangeheader.h": "c",
         "enummonthlengthsheader.h": "c",
-        "sumheader.h": "c"
+        "sumheader.h": "c",
+        "initarrayoperationsheader.h": "c"
     }
 }

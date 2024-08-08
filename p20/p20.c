@@ -5,6 +5,7 @@
 #define SIZESTEP 8
 #define FACTLOWLIMIT 1
 #define FACTUPLIMIT 100
+#define SPACELIMIT 4
 
 #include "initArrayOperationsHeader.h"
 #include "multiplicationsHeader.h"

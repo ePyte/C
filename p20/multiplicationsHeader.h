@@ -22,7 +22,7 @@ void incArraySize(int ** mulArray, int * startIndex, int * endIndex)
     initValArray(*mulArray, *startIndex, *endIndex);
 }
 
-void addDigitToArrayOverTen(int * helperArray, int index, int number)
+void addDigitToArrayOverTens(int * helperArray, int index, int number)
 {
     int overTen = 0;
 
@@ -41,16 +41,13 @@ void addDigitToArrayOverTen(int * helperArray, int index, int number)
 
 void multiplyDigits(int ** mulArray, int endIndex, int * helperArray, int shift, int multiplier)
 {   
-    int overTens = 0;
+
     for(int j = 0; j < endIndex; ++j)
     {
         if((*mulArray)[j] != -1)
         {
-                addDigitToArrayOverTens(helperArray, j+shift, ((*mulArray)[j] * multiplier + overTen) % 10);
-
-
-
-
+                addDigitToArrayOverTens(helperArray, j+shift, ((*mulArray)[j] * multiplier) % 10); //ones
+                addDigitToArrayOverTens(helperArray, j+1+shift, ((*mulArray)[j] * multiplier) / 10); //tens
         }
     }
 }
@@ -62,40 +59,57 @@ void determineBaseValues(baseTypeStruct * baseValues, int nextNumber)
     baseValues->ones = nextNumber % 10;
 }
 
+int overideArrayByHelper(int ** mulArray, int * helperArray, int endIndex)
+{
+    int notCopy = 1;
+    int spaceLeft = 0;
+    for(int i = endIndex - 1; i >= 0 ; --i)
+    {
+        if(*helperArray + i == 0 && notCopy == 1)
+        {
+            ++spaceLeft;
+            continue;
+        }
+        else
+        {
+            notCopy = 0;
+        }
+        (*mulArray)[i] = *(helperArray + i);
+    }
+}
+
 void multiplication(int ** mulArray, int * startIndex, int * endIndex)
 {
     (*mulArray)[0] = FACTLOWLIMIT;
-
-    for(int i = 0; i < (*endIndex); ++i)
-    {
-        printf("%d", (*mulArray)[i]);
-    }
-
-    int overTen = 0;
 
     baseTypeStruct baseValues = {0, 0, 0};
 
     for(int i = FACTLOWLIMIT+1; i <= FACTUPLIMIT; ++i)
     {
-        determineBaseValues(&baseValues, int i);
+        determineBaseValues(&baseValues, i);
         int * helperArray = (int *) malloc(*endIndex * sizeof(int));
         setZeroArrayFunc(helperArray, *endIndex);
-        if(baseValues->hundreds >= 100)
+
+        //ones
+        multiplyDigits(mulArray, *endIndex, helperArray, 0, baseValues.ones);
+
+        if(baseValues.tens >= 10)
         {
-            multiplyDigits(mulArray, *endIndex, helperArray, 2, baseValues->hundreds);
+            multiplyDigits(mulArray, *endIndex, helperArray, 1, baseValues.tens);
         }
 
+        if(baseValues.hundreds >= 100)
+        {
+            multiplyDigits(mulArray, *endIndex, helperArray, 2, baseValues.hundreds);
+        }
 
-
-
-/*
-            if((j+2) == (*endIndex-1)) // max. mul 100 which means +2 digits in the array
-            {
-                incArraySize(mulArray, startIndex, endIndex);
-            }
-*/
+        int spaceLeft = overideArrayByHelper(mulArray, helperArray, *endIndex);
         free(helperArray);
 
+        if(spaceLeft <= SPACELIMIT) // max. mul 100 which means +2 digits in the array;
+        {
+            incArraySize(mulArray, startIndex, endIndex);
+        }
     }
 }
 
