@@ -7,6 +7,7 @@
         "readinputheader.h": "c",
         "operationsheader.h": "c",
         "exchangeheader.h": "c",
-        "enummonthlengthsheader.h": "c"
+        "enummonthlengthsheader.h": "c",
+        "sumheader.h": "c"
     }
 }

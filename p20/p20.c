@@ -6,7 +6,9 @@
 #define FACTLOWLIMIT 1
 #define FACTUPLIMIT 100
 
-#include "operationsHeader.h"
+#include "initArrayOperationsHeader.h"
+#include "multiplicationsHeader.h"
+#include "sumHeader.h"
 
 int main()
 {
