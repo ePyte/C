@@ -9,6 +9,7 @@
         "exchangeheader.h": "c",
         "enummonthlengthsheader.h": "c",
         "sumheader.h": "c",
-        "initarrayoperationsheader.h": "c"
+        "initarrayoperationsheader.h": "c",
+        "multiplicationsheader.h": "c"
     }
 }
