@@ -34,7 +34,7 @@ void addDigitToArrayOverTens(int * helperArray, int index, int number)
         ++index;
     }
 
-    *(helperArray+index) = *(helperArray+index) + overTen;
+    *(helperArray+index) = *(helperArray+index) + overTen+number;
 
 }
 
@@ -57,6 +57,10 @@ void determineBaseValues(baseTypeStruct * baseValues, int nextNumber)
     baseValues->hundreds = nextNumber / 100;
     baseValues->tens = (nextNumber % 100) / 10;
     baseValues->ones = nextNumber % 10;
+    printf("%d\n", baseValues->hundreds);
+    printf("%d\n", baseValues->tens);
+    printf("%d\n", baseValues->ones);
+
 }
 
 int overideArrayByHelper(int ** mulArray, int * helperArray, int endIndex)
@@ -65,7 +69,7 @@ int overideArrayByHelper(int ** mulArray, int * helperArray, int endIndex)
     int spaceLeft = 0;
     for(int i = endIndex - 1; i >= 0 ; --i)
     {
-        if(*helperArray + i == 0 && notCopy == 1)
+        if(*(helperArray + i) == 0 && notCopy == 1)
         {
             ++spaceLeft;
             continue;
@@ -76,22 +80,52 @@ int overideArrayByHelper(int ** mulArray, int * helperArray, int endIndex)
         }
         (*mulArray)[i] = *(helperArray + i);
     }
+    return spaceLeft;
 }
 
 void multiplication(int ** mulArray, int * startIndex, int * endIndex)
-{
+{    
     (*mulArray)[0] = FACTLOWLIMIT;
-
+    printf("2. fv.");
     baseTypeStruct baseValues = {0, 0, 0};
 
     for(int i = FACTLOWLIMIT+1; i <= FACTUPLIMIT; ++i)
-    {
+    {   
         determineBaseValues(&baseValues, i);
+        
         int * helperArray = (int *) malloc(*endIndex * sizeof(int));
         setZeroArrayFunc(helperArray, *endIndex);
+        /*
+        printf("Zero array - before");
+        
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d\n", *(helperArray + i));
+        }
+
+
+        printf("mulArray - before");
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d", *((*mulArray) + i));
+        }
+                */
+
 
         //ones
         multiplyDigits(mulArray, *endIndex, helperArray, 0, baseValues.ones);
+        printf("helperArray");
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d", *(helperArray + i));
+        }
+        printf("mulArray");
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d", *((*mulArray) + i));
+        }
+
+        
 
         if(baseValues.tens >= 10)
         {
@@ -104,10 +138,25 @@ void multiplication(int ** mulArray, int * startIndex, int * endIndex)
         }
 
         int spaceLeft = overideArrayByHelper(mulArray, helperArray, *endIndex);
+        printf("override - helperArray");
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d", *(helperArray + i));
+        }
+        printf("override - mulArray");
+        for(int i = 0; i < *endIndex; ++i)
+        {
+            printf("%d", *((*mulArray) + i));
+        }
+
+
+
+        printf("spaceLeft %d\n", spaceLeft);
         free(helperArray);
 
         if(spaceLeft <= SPACELIMIT) // max. mul 100 which means +2 digits in the array;
         {
+            printf("inc array\n");
             incArraySize(mulArray, startIndex, endIndex);
         }
     }

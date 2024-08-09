@@ -7,6 +7,7 @@ void initValArray(int mulArray[], int start, int end)
     {
         mulArray[i] = -1;
     }
+    
 }
 
 

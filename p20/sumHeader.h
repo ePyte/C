@@ -10,20 +10,25 @@ int sumFunc(int ** mulArray, int * endIndex)
         {
             break;
         }
-        sum += *(mulArray)[i];
+        sum += (*mulArray)[i];
     }
     return sum;
 }
 
 int factorialDigitsSum(int ** mulArray, int * startIndex, int * endIndex)
 {
+    printf("1. fv.");//error
+    
     multiplication(mulArray, startIndex, endIndex);
-
+    printf("after mult");
     for(int i = 0; i < (*endIndex); ++i)
     {
         printf("%d", (*mulArray)[i]);
+
     }
+        printf("\n");
     int sum = sumFunc(mulArray, endIndex);
+    
     return sum;
 }
 #endif
