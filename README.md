@@ -2,10 +2,6 @@
 The purpose of this repository is to collect the solutions written in C of problems listed in site Project Euler. (Link: https://projecteuler.net/archives)
 
 
-# Details
-The script can be started from Terminal with the following prompt: "python permutation.py"
-The program demonstrates two examples and tests.
-
 # Prompts
 Examples of compiling and runnings the programs from terminal. E.g. p1.c
 ```bash
